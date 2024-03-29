@@ -5,6 +5,8 @@ const config = require("dotenv").config();
 
 const { EMAIL, PASSWORD } = process.env;
 
+server.use(express.json());
+
 server.get("/", (req, res) => {
 	res.status(200).json("E-mail server started");
 });
