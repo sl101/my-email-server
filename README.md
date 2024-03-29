@@ -1,1 +1,2 @@
-test server project for deploy on vercel
+server for sending letters to v.zhevaga@gmail.com
+deployed to Vercel.com

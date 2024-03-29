@@ -1,7 +1,7 @@
 const express = require("express");
 const server = express();
 const nodemailer = require("nodemailer");
-const config = require("dotenv").config();
+//const config = require("dotenv").config();
 
 const { EMAIL, PASSWORD } = process.env;
 
@@ -28,8 +28,8 @@ server.post("/email/feedback", async (req, res) => {
 
 		await transporter.sendMail({
 			from: email,
-			to: EMAIL,
-			subject: "mail from Porfolio form",
+			to: email,
+			subject: "E-mail from Porfolio form",
 			html: `
 			<p style="padding-bottom: 15px;
 			border-bottom: 2px dashed #e1d6d6;"><strong>message: </strong> ${message}</p>
