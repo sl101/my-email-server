@@ -1,7 +1,6 @@
 const express = require("express");
 const server = express();
 const nodemailer = require("nodemailer");
-//const config = require("dotenv").config();
 
 const { EMAIL, PASSWORD } = process.env;
 
@@ -56,5 +55,3 @@ server.post("/email/feedback", async (req, res) => {
 server.listen(3000, () => {
 	console.log("listening on port 3000");
 });
-
-//module.exports = server;
