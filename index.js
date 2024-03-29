@@ -1,14 +1,59 @@
+//// Export the Express API
+//module.exports = app;
+
 const express = require("express");
-const app = express();
-const PORT = 4000;
+const server = express();
+const nodemailer = require("nodemailer");
+//const config = require("dotenv").config();
 
-app.get("/", (req, res) => {
-	res.status(200).json("Welcome, your app is working well");
+const { EMAIL, PASSWORD } = process.env;
+
+server.get("/", (req, res) => {
+	res.status(200).json("E-mail server started");
 });
 
-app.listen(PORT, () => {
-	console.log(`Server running at http://localhost:${PORT}`);
+server.post("/email/feedback", async (req, res) => {
+	try {
+		const transporter = nodemailer.createTransport({
+			service: "google",
+			host: "smtp.gmail.com",
+			port: 465,
+			secure: true,
+			auth: {
+				user: EMAIL,
+				pass: PASSWORD,
+			},
+		});
+
+		const { name, phone, email, message } = req.body;
+
+		await transporter.sendMail({
+			from: email,
+			to: EMAIL,
+			subject: "mail from Porfolio form",
+			html: `
+			<p style="padding-bottom: 15px;
+			border-bottom: 2px dashed #e1d6d6;"><strong>message: </strong> ${message}</p>
+		
+			<p><strong>from: </strong>  ${name}</p>
+			<p style={{color: "black"}}><strong>e-mail: </strong> ${email}</p>
+			<p><strong>phone: </strong> ${phone}</p>
+			`,
+		});
+
+		return res.status(200).send({
+			status: 200,
+			message: "Success request",
+		});
+	} catch (error) {
+		console.error(error);
+		return res.status(500).send({
+			status: 500,
+			message: "Error request",
+		});
+	}
 });
 
-// Export the Express API
-module.exports = app;
+server.listen(3000, () => {
+	console.log("listening on port 3000");
+});
