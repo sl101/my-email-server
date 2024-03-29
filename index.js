@@ -28,7 +28,7 @@ server.post("/email/feedback", async (req, res) => {
 
 		await transporter.sendMail({
 			from: email,
-			to: email,
+			to: EMAIL,
 			subject: "E-mail from Porfolio form",
 			html: `
 			<p style="padding-bottom: 15px;
@@ -53,8 +53,8 @@ server.post("/email/feedback", async (req, res) => {
 	}
 });
 
-server.listen(3000, () => {
-	console.log("listening on port 3000");
-});
+//server.listen(3000, () => {
+//	console.log("listening on port 3000");
+//});
 
-module.exports = server;
+//module.exports = server;
