@@ -1,10 +1,12 @@
 const express = require("express");
 const server = express();
+const cors = require('cors');
 const nodemailer = require("nodemailer");
 
 const { EMAIL, PASSWORD } = process.env;
 
 server.use(express.json());
+server.use(cors());
 
 server.get("/", (req, res) => {
 	res.status(200).json("E-mail server started");
