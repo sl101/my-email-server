@@ -6,7 +6,10 @@ const nodemailer = require("nodemailer");
 const { EMAIL, PASSWORD } = process.env;
 
 server.use(express.json());
-server.use(cors());
+server.use(cors({
+	origin: 'http://localhost:3000', // Allow requests from localhost:3000
+	methods: ['GET', 'POST'], // Allow specific HTTP methods
+}));
 
 server.get("/", (req, res) => {
 	res.status(200).json("E-mail server started");
